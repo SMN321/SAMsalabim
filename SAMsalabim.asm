@@ -39,7 +39,7 @@ sam:
 	push	SAM_TEMP
 	push	SAM_EXP
 	push	SAM_BASE
-	in		SAM_TEMP, SREG	; store the SREG on the stack as well
+	in      SAM_TEMP, SREG	; store the SREG on the stack as well
 	push	SAM_TEMP
 
 	clr		SAM_RES			; workaround to ldi SAM_RES, 1 because that would need an r16..r31
