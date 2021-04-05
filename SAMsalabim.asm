@@ -1,12 +1,11 @@
-/*
- * SAMsalabim.asm
- *
- * Created: 04.04.2021
- * Author: Simon Wilhelmstätter
- *
- * This implementation of the Square-And-Multiply (SAM) algorithm currently supports a^b mod 256.
- * Just put the arguments in the SAM_BASE and SAM_EXP registers, call sam and simsalabim: SAM_RES contains the result 
- */ 
+
+ ; SAMsalabim.asm
+ ;
+ ; Created: 04.04.2021
+ ; Author: Simon Wilhelmstätter
+ ;
+ ; This implementation of the Square-And-Multiply (SAM) algorithm currently supports a^b mod 256.
+ ; Just put the arguments in the SAM_BASE and SAM_EXP registers, call sam and simsalabim: SAM_RES contains the result 
 
 .IFNDEF SAMSALABIM_ASM_INCLUDE_GUARD
 .EQU SAMSALABIM_ASM_INCLUDE_GUARD = 0
@@ -31,11 +30,9 @@
 .DEF SAM_TEMP = r16
 .ENDIF	; SAM_TEMP
 
-/* 
- * plan: 
- *  - implement a module 256 version first, then continue with the unreduced form
- *  - expect the arguments in working-registers, then add support for stack-arguments
- */
+ ; plan: 
+ ;  - implement a module 256 version first, then continue with the unreduced form
+ ;  - expect the arguments in working-registers, then add support for stack-arguments
 
 sam:
 	push	SAM_COUNT		; store copies of the used registers on the stack to not introduce any side effects
@@ -47,7 +44,7 @@ sam:
 
 	clr		SAM_RES			; workaround to ldi SAM_RES, 1 because that would need an r16..r31
 	inc		SAM_RES
-	ldi		SAM_COUNT, 8	; oder 7? eher 8
+	ldi		SAM_COUNT, 8
 sam_calc:
 	rcall	sam_square		; square SAM_RES every time
 	sbrc	SAM_EXP, 7		; skip if bit 7 is cleared
